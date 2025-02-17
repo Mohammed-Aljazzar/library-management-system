@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{%load static %}
+{% block title %}Home Page{% endblock %}
+{% block style %}
+@media (max-width: 575px) {
+    .translate-x-50 {
+        transform: translateX(0%);
+    }
+}
+@media (min-width: 575px) {
+    .translate-x-50 {
+        transform: translateX(-60%);
+    }
+}
+@media (min-width: 768px) {
+    .translate-x-50 {
+        transform: translateX(-70%);
+    }
+}
+{%endblock%}
+{% block navbar %}
+<nav class="navbar navbar-expand-sm navbar-dark bg-success">
+    <div class="container">
+        <a class="navbar-brand" href="">Towards the Future</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a href="{% url 'library:home'%}" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'library:books'%}" class="nav-link">Books</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">Authors</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fa fa-user-circle text-light" style="font-size:x-large;"></i>
+                    </a>
+                    <div class="dropdown-menu translate-x-50" aria-labelledby="navbarDropdownMenuLink" >
+                        <a class="dropdown-item" href="{%url 'accounts:update_profile'%}">My Profile</a>
+                        <a class="dropdown-item" href="{%url 'accounts:password_change' %}">Change Password</a>
+                        <a class="dropdown-item" href="{%url 'accounts:logout'%}">Logout</a>
+                    </div>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a href="{% url 'accounts:signup' %}" class="nav-link rounded">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'accounts:login' %}" class="nav-link rounded">Login</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="pt-3">
+    <!-- صفحة الواجهة الرئيسية (Landing Page) -->
+    <section class="landing-page py-5" style="height: 100vh;">
+        <div class="container text-center">
+            <h1 class="display-4 text-success">Welcome to Towards the Future Library</h1>
+            <p class="text-success lead">Browse through a wide collection of books and discover endless knowledge.</p>
+            <img src="{% static 'img/logo.png'%}" alt="" class="w-40 h-20 rounded" style="height: 200px;">
+              
+              <div class="mt-4">
+                    <form action="#" method="get">
+                          <div class="row justify-content-center mt-5">
+                          <!-- شريط البحث -->
+                              <div class="col-12 col-md-6 mb-3">
+                                  <input type="text" class="form-control search-bar" placeholder="Search for books..." aria-label="Search">
+                              </div>
+
+                              <!-- فلتر الفئات -->
+                              <div class="col-12 col-md-6 mb-3">
+                                  <select class="form-control category-filter">
+                                      <option value="">Select Category</option>
+                                      <option value="fiction">Fiction</option>
+                                      <option value="fiction">Fiction</option>
+                                  </select>
+                              </div>
+
+                              <!-- زر البحث -->
+                              <div class="w-100 ">
+
+                                <button type="submit" class="btn btn-light w-100 text-center  d-block">Search</button>
+                              </div>
+                          </div>
+                    </form>
+              </div>
+          </div>
+    </section>
+    <h1>hello</h1>
+
+</div>
+{% endblock %}
